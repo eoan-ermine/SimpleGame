@@ -1,5 +1,8 @@
 #include "AbstractEquipment.h"
 
+#include "../../Player/AbstractPlayer/AbstractPlayer.h"
+#include "../../Battle/BattleFormulas.h"
+
 AbstractEquipment::AbstractEquipment(): Item("Default name", "Default description", ItemType::EQUIPMENT) {
 }
 
@@ -7,24 +10,6 @@ AbstractEquipment::AbstractEquipment(std::string name, std::string description):
 }
 
 AbstractEquipment::~AbstractEquipment() {
-}
-
-void AbstractEquipment::setEquipmentType(EquipmentType newType) {
-    this->equipmentType = newType;
-    if(equipmentType == EquipmentType::WEAPON) {
-        if(armorType != ArmorType::NONE) {
-            armorType = ArmorType::NONE;
-        }
-        armorInfo = {};
-    } else {
-        weaponInfo = {};
-    }
-}
-
-void AbstractEquipment::setArmorType(ArmorType newType) {
-    if(equipmentType != EquipmentType::WEAPON) {
-        this->armorType = newType;
-    }
 }
 
 void AbstractEquipment::setHitPoints(int newHitPoints) {
@@ -67,3 +52,15 @@ EquipmentType AbstractEquipment::getEquipmentType() {
 ArmorType AbstractEquipment::getArmorType() {
     return this->armorType;
 }
+
+// To do
+/*void AbstractEquipment::use(AbstractPlayer* lhs, AbstractPlayer* rhs) {
+    int aAccuracy = lhs->getStat(StatType::ACCURACY);
+    int vDodge = rhs->getStat(StatType::EVASION);
+    if(BattleFormulas::hitSuccessful(aAccuracy, vDodge)) {
+        int aMinHitValue=0, int aMaxHitValue=weaponInfo.damage, int vArmor=rhs.;
+        rhs->changeStat(StatType::HEALTH, -(BattleFormulas::calculateDamage()))
+    } else {
+
+    }
+}*/

@@ -112,8 +112,11 @@ bool AbstractPlayer::setStat(StatType stat, float value) noexcept {
     case StatType::HUNGER:
         this->stats.hunger = value;
         break;
-    case StatType::ARMOR:
-        this->stats.armor = value;
+    case StatType::MAX_HEALTH:
+        this->stats.maxHealth = value;
+        break;
+    case StatType::MAX_HUNGER:
+        this->stats.maxHunger = value;
         break;
     default:
         return false;
@@ -152,8 +155,11 @@ bool AbstractPlayer::changeStat(StatType stat, float value) noexcept {
     case StatType::HUNGER:
         this->stats.hunger += value;
         break;
-    case StatType::ARMOR:
-        this->stats.armor += value;
+    case StatType::MAX_HEALTH:
+        this->stats.maxHealth += value;
+        break;
+    case StatType::MAX_HUNGER:
+        this->stats.maxHunger += value;
         break;
     default:
         return false;
@@ -177,8 +183,12 @@ float AbstractPlayer::getStat(StatType stat) const noexcept {
         return this->stats.health;
     case StatType::HUNGER:
         return this->stats.hunger;
-    case StatType::ARMOR:
-        return this->stats.armor;
+    case StatType::MAX_HEALTH:
+        return this->stats.maxHealth;
+        break;
+    case StatType::MAX_HUNGER:
+        return this->stats.maxHunger;
+        break;
     default:
         return 0;
     }

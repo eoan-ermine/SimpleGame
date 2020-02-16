@@ -15,8 +15,8 @@ private:
     AbstractRoom* currentRoom = nullptr;
 
     struct {
-        float health, armor, hunger;
-        int accuracy, evasion, strength, experience, level;
+        float health=100, hunger=100, maxHealth=100, maxHunger=100;
+        int accuracy=10, evasion=10, strength=10, experience=0, level=1;
     } stats;
 
     struct {

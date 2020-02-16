@@ -3,9 +3,9 @@
 #include <string>
 #include <string_view>
 
-class AbstractPlayer;
+#include "../Utility/Utility.h"
 
-enum ItemType { ITEM, EQUIPMENT };
+class AbstractPlayer;
 
 class Item {
 private:
@@ -21,7 +21,7 @@ public:
     void setName(std::string newName);
     void setDescription(std::string newDescription);
 
-    virtual void use(AbstractPlayer* ply) = 0;
+    virtual void use(AbstractPlayer* lhs, AbstractPlayer* rhs) = 0;
 
     std::string_view getName();
     std::string_view getDescription();
