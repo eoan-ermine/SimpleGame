@@ -10,4 +10,15 @@ struct MyHash {
     }
 };
 
-enum Direction { NORTH, SOUTH, EAST, WEST };
+enum class Direction { NORTH, SOUTH, EAST, WEST };
+
+enum class EquipmentType {WEAPON, ARMOR};
+enum class ArmorType {NONE, HEAD, BODY, LEGS, BOOTS};
+
+struct Penetration {
+    float sharp, blunt, heat;
+};
+
+enum class StatType {
+    HEALTH, ACCURACY, EVASION, ARMOR, HUNGER, STRENGTH, EXPERIENCE, LEVEL
+};

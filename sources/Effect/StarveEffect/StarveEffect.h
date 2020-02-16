@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../AbstractEffect.h"
+#include "../../Utility/Utility.h"
 
 class StarveEffect: public AbstractEffect {
 public:

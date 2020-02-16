@@ -1,10 +1,7 @@
 #include "MagePlayer.h"
 
-MagePlayer::MagePlayer()
-{
+MagePlayer::MagePlayer(): AbstractPlayer() {
 }
 
-MagePlayer::~MagePlayer()
-{
+MagePlayer::~MagePlayer() {
 }
-

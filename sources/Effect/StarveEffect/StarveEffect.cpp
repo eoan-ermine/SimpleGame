@@ -10,5 +10,5 @@ StarveEffect::~StarveEffect() {
 
 
 void StarveEffect::action(AbstractPlayer* ply) {
-    ply->changeHunger(-0.2);
+    ply->changeStat(StatType::HUNGER, -0.2f);
 }

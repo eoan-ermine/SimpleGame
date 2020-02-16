@@ -59,3 +59,11 @@ void AbstractEquipment::setDamage(float newDamage) {
         this->weaponInfo.damage = newDamage;
     }
 }
+
+EquipmentType AbstractEquipment::getEquipmentType() {
+    return this->equipmentType;
+}
+
+ArmorType AbstractEquipment::getArmorType() {
+    return this->armorType;
+}

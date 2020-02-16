@@ -18,4 +18,5 @@ public:
     void reset() noexcept;
 
     std::size_t size() noexcept;
+    bool contains(Item* key) const noexcept;
 };

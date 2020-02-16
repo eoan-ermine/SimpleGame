@@ -22,3 +22,7 @@ void Inventory::reset() noexcept {
 std::size_t Inventory::size() noexcept {
     return inventory.size();
 }
+
+bool Inventory::contains(Item* key) const noexcept {
+    return inventory.find(hash(key)) != inventory.end();
+}

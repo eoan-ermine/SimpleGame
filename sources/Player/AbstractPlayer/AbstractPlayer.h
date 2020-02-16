@@ -7,30 +7,52 @@
 #include "../../Item/Inventory/Inventory.h"
 #include "../../Effect/AbstractEffect.h"
 #include "../../Effect/StarveEffect/StarveEffect.h"
+#include "../../Item/Equipment/AbstractEquipment.h"
 
 class AbstractPlayer {
 private:
     Maze* currentMaze = nullptr;
     AbstractRoom* currentRoom = nullptr;
 
-    float health, hunger;
+    struct {
+        float health, armor, hunger;
+        int accuracy, evasion, strength, experience, level;
+    } stats;
+
+    struct {
+        struct {
+            AbstractEquipment *first;
+        } weapon;
+        struct {
+            AbstractEquipment *head, *body, *legs, *boots;
+        } armor;
+    } wearedEquipment;
 
     std::vector<AbstractEffect*> effects;
     Inventory inventory;
 public:
     AbstractPlayer();
-    AbstractPlayer(int health, int hunger);
+    AbstractPlayer(float health, float hunger);
     ~AbstractPlayer();
 
     void setMaze(Maze* newMaze) noexcept;
+    Maze* getMaze() const;
+
     void setRoom(AbstractRoom* newRoom) noexcept;
+    AbstractRoom* getRoom() const;
+
     void tick() noexcept;
 
-    void setHealth(int newHealth);
-    void changeHealth(int healthDelta);
+    bool setStat(StatType stat, int value) noexcept;
+    bool setStat(StatType stat, float value) noexcept;
 
-    void setHunger(int newHunger);
-    void changeHunger(int hungerDelta);
+    bool changeStat(StatType stat, int value) noexcept;
+    bool changeStat(StatType stat, float value) noexcept;
+
+    float getStat(StatType stat) const noexcept;
+
+    bool wearEquipment(AbstractEquipment* equipment);
+    void unwearEquipment(EquipmentType equipmentType, ArmorType armorType);
 
     Inventory* getInventory() noexcept;
 };

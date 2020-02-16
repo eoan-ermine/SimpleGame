@@ -1,10 +1,7 @@
 #include "RoguePlayer.h"
 
-RoguePlayer::RoguePlayer()
-{
+RoguePlayer::RoguePlayer(): AbstractPlayer() {
 }
 
-RoguePlayer::~RoguePlayer()
-{
+RoguePlayer::~RoguePlayer() {
 }
-

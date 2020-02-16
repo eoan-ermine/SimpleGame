@@ -1,20 +1,12 @@
 #pragma once
 
 #include "../Item.h"
-
-enum EquipmentType {WEAPON, ARMOR};
-enum ArmorType {NONE, HEAD, BOOTS, LEGS, BODY};
-
-struct Penetration {
-    float sharp, blunt, heat;
-};
-
+#include "../../Utility/Utility.h"
 
 class AbstractEquipment: public Item {
 private:
     EquipmentType equipmentType;
     ArmorType armorType;
-
 
     struct {
         int maxHitPoints, hitPoints, mass;
@@ -40,4 +32,7 @@ public:
     void setMass(int newMass);
     void setPenetration(Penetration newPenetration);
     void setDamage(float newDamage);
+
+    EquipmentType getEquipmentType();
+    ArmorType getArmorType();
 };

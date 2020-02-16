@@ -7,8 +7,8 @@
 
 class AbstractRoom {
 private:
-    std::unordered_map<Direction, std::vector<std::pair<Door*, AbstractRoom*>>> doors;
+    std::unordered_map<Direction, std::vector<Door*>> doors;
 public:
-    const std::unordered_map<Direction, std::vector<std::pair<Door*, AbstractRoom*>>>& getDoors() const;
-    void addDoor(Door* door, AbstractRoom* destination) noexcept;
+    const std::unordered_map<Direction, std::vector<Door*>>& getDoors() const;
+    void addDoor(Door* door) noexcept;
 };
