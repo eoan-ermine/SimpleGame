@@ -1,6 +1,7 @@
 #include "AbstractPlayer.h"
 
 AbstractPlayer::AbstractPlayer(): health(100), hunger(100) {
+    effects.push_back(new StarveEffect(0));
 }
 
 

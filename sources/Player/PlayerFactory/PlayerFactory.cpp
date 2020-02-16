@@ -15,5 +15,7 @@ AbstractPlayer* PlayerFactory::createPlayer(PlayerType type) {
         return new MagePlayer();
     case PlayerType::ROGUE:
         return new RoguePlayer();
+    default:
+        return new AbstractPlayer();
     }
 }

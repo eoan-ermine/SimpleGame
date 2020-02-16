@@ -6,13 +6,14 @@
 #include "../../Maze/RoomSystem/AbstractRoom/AbstractRoom.h"
 #include "../../Item/Inventory/Inventory.h"
 #include "../../Effect/AbstractEffect.h"
+#include "../../Effect/StarveEffect/StarveEffect.h"
 
 class AbstractPlayer {
 private:
     Maze* currentMaze = nullptr;
     AbstractRoom* currentRoom = nullptr;
 
-    int health, hunger;
+    float health, hunger;
 
     std::vector<AbstractEffect*> effects;
     Inventory inventory;
