@@ -1,5 +1,9 @@
 #include "Item.h"
 
+Item::Item(): name("Default name"), description("Default description"), type(ItemType::ITEM) {}
+
+Item::Item(std::string name, std::string description): name(std::move(name)), description(std::move(description)), type(ItemType::ITEM) { }
+
 Item::Item(std::string name, std::string description, ItemType type): name(std::move(name)), description(std::move(description)), type(type) { }
 
 Item::~Item() {
