@@ -3,10 +3,12 @@
 #include "../../Player/AbstractPlayer/AbstractPlayer.h"
 #include "../../Battle/BattleFormulas.h"
 
-AbstractEquipment::AbstractEquipment(): Item("Default name", "Default description", ItemType::EQUIPMENT) {
+AbstractEquipment::AbstractEquipment(EquipmentType type): Item("Default name", "Default description", ItemType::EQUIPMENT) {
+    this->equipmentType = type;
 }
 
-AbstractEquipment::AbstractEquipment(std::string name, std::string description): Item(name, description, ItemType::EQUIPMENT) {
+AbstractEquipment::AbstractEquipment(std::string name, std::string description, EquipmentType type): Item(name, description, ItemType::EQUIPMENT) {
+    this->equipmentType = type;
 }
 
 AbstractEquipment::~AbstractEquipment() {
@@ -31,27 +33,22 @@ void AbstractEquipment::setMass(int newMass) {
     this->commonInfo.mass = newMass;
 }
 
-void AbstractEquipment::setPenetration(Penetration newPenetration) {
-    if(equipmentType == EquipmentType::ARMOR) {
-        newPenetration.sharp > 1 ? armorInfo.penetration.sharp = 1 : armorInfo.penetration.sharp = newPenetration.sharp;
-        newPenetration.blunt > 1 ? armorInfo.penetration.blunt = 1 : armorInfo.penetration.blunt = newPenetration.blunt;
-        newPenetration.heat > 1 ? armorInfo.penetration.heat = 1 : armorInfo.penetration.heat = newPenetration.heat;
-    }
-}
-
-void AbstractEquipment::setDamage(float newDamage) {
-    if(equipmentType == EquipmentType::WEAPON) {
-        this->weaponInfo.damage = newDamage;
-    }
-}
-
 EquipmentType AbstractEquipment::getEquipmentType() {
     return this->equipmentType;
 }
 
-ArmorType AbstractEquipment::getArmorType() {
-    return this->armorType;
+int AbstractEquipment::getHitPoints() {
+    return this->commonInfo.hitPoints;
 }
+
+int AbstractEquipment::getMaxHitPoints() {
+    return this->commonInfo.maxHitPoints;
+}
+
+int AbstractEquipment::getMass() {
+    return this->commonInfo.mass;
+}
+
 
 // To do
 /*void AbstractEquipment::use(AbstractPlayer* lhs, AbstractPlayer* rhs) {

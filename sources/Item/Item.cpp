@@ -24,3 +24,5 @@ std::string_view Item::getName() {
 std::string_view Item::getDescription() {
     return this->description;
 }
+
+void Item::use(AbstractPlayer* lhs, AbstractPlayer* rhs) {}

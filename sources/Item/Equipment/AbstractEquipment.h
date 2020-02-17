@@ -5,6 +5,7 @@
 
 class AbstractEquipment: public Item {
 private:
+    EquipmentType equipmentType;
     struct {
         int maxHitPoints, hitPoints, mass;
     } commonInfo;
@@ -18,4 +19,8 @@ public:
     void setMass(int newMass);
 
     EquipmentType getEquipmentType();
+
+    int getHitPoints();
+    int getMaxHitPoints();
+    int getMass();
 };

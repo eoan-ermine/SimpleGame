@@ -1,7 +1,15 @@
-#include <iostream>
+#include <SFML/Window.hpp>
 
-#include "Player/AbstractPlayer/AbstractPlayer.h"
-#include "Maze/MazeSystem/Maze/Maze.h"
-#include "Maze/RoomSystem/AbstractRoom/AbstractRoom.h"
+int main() {
+    sf::Window window(sf::VideoMode(800, 600), "SimpleGame");
 
-int main() {}
+    while (window.isOpen()) {
+        sf::Event event;
+        while (window.pollEvent(event)) {
+            if (event.type == sf::Event::Closed) {
+                window.close();
+            }
+        }
+    }
+    return 0;
+}

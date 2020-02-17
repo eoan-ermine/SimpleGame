@@ -33,23 +33,30 @@ void AbstractPlayer::tick() noexcept {
     }
 }
 
-bool AbstractPlayer::wearEquipment(AbstractEquipment* equipment) {
-    if(inventory.contains(equipment)) {
-        EquipmentType equipmentType = equipment->getEquipmentType();
-        ArmorType armorType = equipment->getArmorType();
+bool AbstractPlayer::wearEquipment(AbstractWeapon* weapon) {
+    if(inventory.contains(weapon)) {
+        WeaponType weaponType = weapon->getWeaponType();
+        if(weaponType == WeaponType::FIRST) {
+            this->wearedEquipment.weapon.first = weapon;
+        }
+        return true;
+    } else {
+        return false;
+    }
+}
 
-        if(equipmentType == EquipmentType::WEAPON) {
-            this->wearedEquipment.weapon.first = equipment;
-        } else {
-            if(armorType == ArmorType::HEAD) {
-                this->wearedEquipment.armor.head = equipment;
-            } else if(armorType == ArmorType::BODY) {
-                this->wearedEquipment.armor.body = equipment;
-            } else if(armorType == ArmorType::LEGS) {
-                this->wearedEquipment.armor.legs = equipment;
-            } else if(armorType == ArmorType::BOOTS) {
-                this->wearedEquipment.armor.boots = equipment;
-            }
+bool AbstractPlayer::wearEquipment(AbstractArmor* armor) {
+    if(inventory.contains(armor)) {
+        ArmorType armorType = armor->getArmorType();
+
+        if(armorType == ArmorType::HEAD) {
+            this->wearedEquipment.armor.head = armor;
+        } else if(armorType == ArmorType::BODY) {
+            this->wearedEquipment.armor.body = armor;
+        } else if(armorType == ArmorType::LEGS) {
+            this->wearedEquipment.armor.legs = armor;
+        } else if(armorType == ArmorType::BOOTS) {
+            this->wearedEquipment.armor.boots = armor;
         }
         return true;
     } else {

@@ -14,4 +14,7 @@ public:
     ~AbstractWeapon();
 
     void setDamage(float newDamage);
+
+    WeaponType getWeaponType();
+    float getDamage();
 };

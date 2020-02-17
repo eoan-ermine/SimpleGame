@@ -7,7 +7,10 @@
 #include "../../Item/Inventory/Inventory.h"
 #include "../../Effect/AbstractEffect.h"
 #include "../../Effect/StarveEffect/StarveEffect.h"
-#include "../../Item/Equipment/AbstractEquipment.h"
+
+#include "../../Item/Equipment/AbstractWeapon/AbstractWeapon.h"
+#include "../../Item/Equipment/AbstractArmor/AbstractArmor.h"
+
 
 class AbstractPlayer {
 private:
@@ -21,10 +24,10 @@ private:
 
     struct {
         struct {
-            AbstractEquipment *first;
+            AbstractWeapon *first;
         } weapon;
         struct {
-            AbstractEquipment *head, *body, *legs, *boots;
+            AbstractArmor *head, *body, *legs, *boots;
         } armor;
     } wearedEquipment;
 
@@ -51,7 +54,9 @@ public:
 
     float getStat(StatType stat) const noexcept;
 
-    bool wearEquipment(AbstractEquipment* equipment);
+    bool wearEquipment(AbstractArmor* armor);
+    bool wearEquipment(AbstractWeapon* weapon);
+
     void unwearEquipment(EquipmentType equipmentType, ArmorType armorType);
 
     Inventory* getInventory() noexcept;

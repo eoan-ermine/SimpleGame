@@ -14,4 +14,7 @@ public:
     ~AbstractArmor();
 
     void setPenetration(Penetration newPenetration);
+
+    ArmorType getArmorType();
+    Penetration getPenetration();
 };
