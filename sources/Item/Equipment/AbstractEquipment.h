@@ -12,7 +12,7 @@ private:
 public:
     AbstractEquipment(EquipmentType equipmentType);
     AbstractEquipment(std::string name, std::string description, EquipmentType equipmentType);
-    ~AbstractEquipment();
+    virtual ~AbstractEquipment();
 
     void setHitPoints(int newHitPoints);
     void setMaxHitPoints(int newMaxHitPoints);

@@ -16,7 +16,7 @@ public:
     Item();
     Item(std::string name, std::string description);
     Item(std::string name, std::string description, ItemType type);
-    ~Item();
+    virtual ~Item();
 
     void setName(std::string newName);
     void setDescription(std::string newDescription);

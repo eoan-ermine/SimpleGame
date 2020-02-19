@@ -8,6 +8,9 @@ AbstractArmor::AbstractArmor(std::string name, std::string description, ArmorTyp
     this->armorType = type;
 }
 
+AbstractArmor::~AbstractArmor() {
+}
+
 void AbstractArmor::setPenetration(Penetration newPenetration) {
     this->armorInfo.penetration = newPenetration;
 }

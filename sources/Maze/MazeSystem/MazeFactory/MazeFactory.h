@@ -1,13 +1,12 @@
 #pragma once
 
 #include "../Maze/Maze.h"
-
-enum MazeType { STANDARD };
+#include "../../../Utility/Utility.h"
 
 class MazeFactory {
 public:
     MazeFactory();
     ~MazeFactory();
 
-    Maze* createMaze(MazeType type);
+    static Maze* createMaze(MazeType type);
 };

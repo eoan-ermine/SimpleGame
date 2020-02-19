@@ -7,6 +7,9 @@ AbstractFood::AbstractFood(int value): Item("Default name", "Default description
 
 AbstractFood::AbstractFood(std::string name, std::string description, int value): Item("Default name", "Default description"), value(value) {}
 
+AbstractFood::~AbstractFood() {
+}
+
 void AbstractFood::setValue(int newValue) {
     this->value = newValue;
 }

@@ -8,8 +8,9 @@ class LinesVector: public sf::Drawable {
 private:
     std::vector<sf::Vertex> vertices;
 public:
+    LinesVector() { }
     LinesVector(std::vector<sf::Vertex> vertices): vertices(std::move(vertices)) {
-        unsigned size = this->vertices.size();
+        unsigned size = vertices.size();
         if(size % 2 != 0 or not size) {
             throw std::length_error("Bad vertices size: " + std::to_string(size));
         }
@@ -22,7 +23,7 @@ public:
         }
     }
     void operator=(std::vector<sf::Vertex> vertices) {
-        unsigned size = this->vertices.size();
+        unsigned size = vertices.size();
         if(size % 2 != 0 or not size) {
             throw std::length_error("Bad vertices size: " + std::to_string(size));
         }

@@ -36,7 +36,7 @@ private:
 public:
     AbstractPlayer();
     AbstractPlayer(float health, float hunger);
-    ~AbstractPlayer();
+    virtual ~AbstractPlayer();
 
     void setMaze(Maze* newMaze) noexcept;
     Maze* getMaze() const;

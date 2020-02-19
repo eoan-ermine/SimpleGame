@@ -11,6 +11,9 @@ AbstractWeapon::AbstractWeapon(std::string name, std::string description, Weapon
     this->weaponType = type;
 }
 
+AbstractWeapon::~AbstractWeapon() {
+}
+
 void AbstractWeapon::setDamage(float newDamage) {
     this->weaponInfo.damage = newDamage;
 }

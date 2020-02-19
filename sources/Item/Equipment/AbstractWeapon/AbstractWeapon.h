@@ -13,7 +13,7 @@ private:
 public:
     AbstractWeapon(WeaponType type);
     AbstractWeapon(std::string name, std::string description, WeaponType type);
-    ~AbstractWeapon();
+    virtual ~AbstractWeapon();
 
     void setDamage(float newDamage);
 

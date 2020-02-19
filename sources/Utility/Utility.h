@@ -2,6 +2,10 @@
 
 #include <cmath>
 
+enum class RoomType { STANDARD };
+
+enum class MazeType { STANDARD };
+
 template<typename Tval>
 struct MyHash {
     std::size_t operator()(const Tval* val) const {

@@ -1,15 +1,12 @@
 #pragma once
 
 #include "../StandardRoom/StandardRoom.h"
+#include "../../../Utility/Utility.h"
 
-enum RoomType { STANDARD };
-
-class RoomFactory
-{
+class RoomFactory {
 public:
     RoomFactory();
     ~RoomFactory();
 
-    AbstractRoom* createRoom(RoomType type);
+    static AbstractRoom* createRoom(RoomType type);
 };
-

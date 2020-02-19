@@ -11,7 +11,7 @@ private:
 public:
     AbstractArmor(ArmorType type);
     AbstractArmor(std::string name, std::string description, ArmorType type);
-    ~AbstractArmor();
+    virtual ~AbstractArmor();
 
     void setPenetration(Penetration newPenetration);
 
