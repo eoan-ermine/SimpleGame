@@ -1,3 +1,5 @@
+#pragma once
+
 #include "../Utility/RandomGenerator.h"
 
 struct BattleFormulas {

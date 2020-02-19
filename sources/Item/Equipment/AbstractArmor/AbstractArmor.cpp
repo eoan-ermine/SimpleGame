@@ -19,3 +19,7 @@ ArmorType AbstractArmor::getArmorType() {
 Penetration AbstractArmor::getPenetration() {
     return this->armorInfo.penetration;
 }
+
+int AbstractArmor::calculateArmor() {
+    return armorInfo.penetration.blunt + armorInfo.penetration.sharp + armorInfo.penetration.heat;
+}

@@ -196,7 +196,28 @@ float AbstractPlayer::getStat(StatType stat) const noexcept {
     case StatType::MAX_HUNGER:
         return this->stats.maxHunger;
         break;
+    case StatType::ARMOR:
+        return (wearedEquipment.armor.head->calculateArmor() + wearedEquipment.armor.body->calculateArmor() + wearedEquipment.armor.legs->calculateArmor() + wearedEquipment.armor.boots->calculateArmor()) / 2;
+        break;
     default:
         return 0;
     }
+}
+
+bool AbstractPlayer::dropItem(Item* item) noexcept {
+    if(inventory.contains(item)) {
+        inventory.deleteItem(item);
+        this->getRoom()->getInventory()->addItem(item);
+        return true;
+    }
+    return false;
+}
+
+bool AbstractPlayer::getItem(Item* item) noexcept {
+    if(Inventory* inv = this->getRoom()->getInventory(); inv->contains(item)) {
+        inv->deleteItem(item);
+        inventory.addItem(item);
+        return true;
+    }
+    return false;
 }

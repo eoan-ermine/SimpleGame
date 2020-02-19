@@ -2,6 +2,8 @@
 
 #include "../AbstractEquipment.h"
 
+class AbstractPlayer;
+
 class AbstractWeapon: public AbstractEquipment {
 private:
     WeaponType weaponType;
@@ -17,4 +19,6 @@ public:
 
     WeaponType getWeaponType();
     float getDamage();
+
+    void use(AbstractPlayer* lhs, AbstractPlayer* rhs) override;
 };

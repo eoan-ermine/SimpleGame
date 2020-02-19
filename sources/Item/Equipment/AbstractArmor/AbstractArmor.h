@@ -17,4 +17,6 @@ public:
 
     ArmorType getArmorType();
     Penetration getPenetration();
+
+    int calculateArmor();
 };

@@ -44,7 +44,7 @@ public:
     void setRoom(AbstractRoom* newRoom) noexcept;
     AbstractRoom* getRoom() const;
 
-    void tick() noexcept;
+    virtual void tick() noexcept;
 
     bool setStat(StatType stat, int value) noexcept;
     bool setStat(StatType stat, float value) noexcept;
@@ -56,8 +56,9 @@ public:
 
     bool wearEquipment(AbstractArmor* armor);
     bool wearEquipment(AbstractWeapon* weapon);
-
     void unwearEquipment(EquipmentType equipmentType, ArmorType armorType);
 
     Inventory* getInventory() noexcept;
+    bool dropItem(Item* item) noexcept;
+    bool getItem(Item* item) noexcept;
 };
