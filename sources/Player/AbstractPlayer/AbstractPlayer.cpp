@@ -15,7 +15,7 @@ AbstractPlayer::~AbstractPlayer() {
 }
 
 
-void AbstractPlayer::setMaze(Maze* newMaze) noexcept {
+void AbstractPlayer::setMaze(AbstractMaze* newMaze) noexcept {
     this->currentMaze = newMaze;
 }
 
@@ -80,7 +80,7 @@ void AbstractPlayer::unwearEquipment(EquipmentType equipmentType, ArmorType armo
     }
 }
 
-Maze* AbstractPlayer::getMaze() const {
+AbstractMaze* AbstractPlayer::getMaze() const {
     return this->currentMaze;
 }
 

@@ -3,7 +3,7 @@
 #include <vector>
 #include <algorithm>
 
-#include "../../Maze/MazeSystem/Maze/Maze.h"
+#include "../../Maze/MazeSystem/AbstractMaze/AbstractMaze.h"
 #include "../../Maze/RoomSystem/AbstractRoom/AbstractRoom.h"
 #include "../../Item/Inventory/Inventory.h"
 #include "../../Effect/AbstractEffect.h"
@@ -15,7 +15,7 @@
 
 class AbstractPlayer: public GameObject {
 private:
-    Maze* currentMaze = nullptr;
+    AbstractMaze* currentMaze = nullptr;
     AbstractRoom* currentRoom = nullptr;
 
     struct {
@@ -39,8 +39,8 @@ public:
     AbstractPlayer(float health, float hunger);
     virtual ~AbstractPlayer();
 
-    void setMaze(Maze* newMaze) noexcept;
-    Maze* getMaze() const;
+    void setMaze(AbstractMaze* newMaze) noexcept;
+    AbstractMaze* getMaze() const;
 
     void setRoom(AbstractRoom* newRoom) noexcept;
     AbstractRoom* getRoom() const;

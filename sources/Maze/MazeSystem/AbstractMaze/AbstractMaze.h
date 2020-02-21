@@ -1,21 +1,22 @@
 #pragma once
 
 #include "../../RoomSystem/AbstractRoom/AbstractRoom.h"
-#include "../../../Utility/Utility.h"
 #include "../../../GameWindow/Game/GameObject/GameObject.h"
 
-class Maze: public GameObject {
+#include <algorithm>
+#include <vector>
+
+class AbstractMaze: public GameObject {
 private:
-    MyHash<AbstractRoom> hash;
-    std::unordered_map<std::size_t, AbstractRoom*> rooms;
+    std::vector<AbstractRoom*> rooms;
 public:
-    Maze();
-    ~Maze();
+    AbstractMaze();
+    ~AbstractMaze();
 
     void addRoom(AbstractRoom* room) noexcept;
     void deleteRoom(AbstractRoom* room) noexcept;
     void reset() noexcept;
 
-    const std::unordered_map<std::size_t, AbstractRoom*>& getRooms();
+    const std::vector<AbstractRoom*>& getRooms();
     std::size_t countOfRooms();
 };

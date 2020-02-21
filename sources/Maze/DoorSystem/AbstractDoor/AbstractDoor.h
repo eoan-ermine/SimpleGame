@@ -1,18 +1,18 @@
 #pragma once
 
-#include "../../Utility/Utility.h"
-#include "../../GameWindow/Game/GameObject/GameObject.h"
+#include "../../../Utility/Utility.h"
+#include "../../../GameWindow/Game/GameObject/GameObject.h"
 
 class AbstractRoom;
 class AbstractPlayer;
 
-class Door: public GameObject {
+class AbstractDoor: public GameObject {
 private:
     AbstractRoom *source, *destination;
     Direction direction;
 public:
-    Door(AbstractRoom* source, AbstractRoom* destination, Direction direction);
-    ~Door();
+    AbstractDoor(AbstractRoom* source, AbstractRoom* destination, Direction direction);
+    ~AbstractDoor();
 
     Direction getDirection() const noexcept;
 

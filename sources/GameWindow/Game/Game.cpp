@@ -1,6 +1,6 @@
 #include "Game.h"
 
-Game::Game(): spawnMaze(new Maze()), spawnRoom(new AbstractRoom()), player(new AbstractPlayer()) {
+Game::Game(): spawnMaze(new AbstractMaze()), spawnRoom(new AbstractRoom()), player(new AbstractPlayer()) {
     spawnMaze->addRoom(spawnRoom);
     player->setRoom(spawnRoom);
 
@@ -37,6 +37,9 @@ void Game::updateEffects() {
     std::vector<std::pair<ObjectType, GameObject*>> toDelete;
     for(GameObject* object: gameObjects[ObjectType::PLAYER]) {
         AbstractPlayer* player = dynamic_cast<AbstractPlayer*>(object);
+        if(player == nullptr) {
+            throw std::runtime_error("Excepted AbstractPlayer got other class");
+        }
         for(AbstractEffect* effect: player->getEffects()) {
             if(effect->getRemains() > 0) {
                 effect->action(player);
@@ -55,7 +58,7 @@ void Game::writeHunger() {
 }
 
 
-void Game::changeSpawnMaze(Maze* newMaze) noexcept {
+void Game::changeSpawnMaze(AbstractMaze* newMaze) noexcept {
     std::vector<GameObject*>& category = gameObjects[ObjectType::MAZE];
     if(auto it = std::find(category.begin(), category.end(), newMaze); it == category.end()) {
         category.push_back(newMaze);
@@ -79,7 +82,7 @@ void Game::changePlayer(AbstractPlayer* newPlayer) noexcept {
     player = newPlayer;
 }
 
-Maze* Game::getSpawnMaze() const noexcept {
+AbstractMaze* Game::getSpawnMaze() const noexcept {
     return spawnMaze;
 }
 

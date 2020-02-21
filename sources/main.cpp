@@ -1,5 +1,5 @@
 #include "GameWindow/GameWindow.h"
-#include "Player/Monster/AbstractMonster.h"
+#include "Player/AbstractMonster/AbstractMonster.h"
 
 int main() {
     GameWindow window;
