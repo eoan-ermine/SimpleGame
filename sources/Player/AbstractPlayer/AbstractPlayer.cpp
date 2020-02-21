@@ -105,6 +105,12 @@ bool AbstractPlayer::setStat(StatType stat, int value) noexcept {
     case StatType::LEVEL:
         this->stats.level = value;
         break;
+    case StatType::MANA:
+        this->stats.mana = value;
+        break;
+    case StatType::MAX_MANA:
+        this->stats.maxMana = value;
+        break;
     default:
         return false;
     }
@@ -147,6 +153,12 @@ bool AbstractPlayer::changeStat(StatType stat, int value) noexcept {
         break;
     case StatType::LEVEL:
         this->stats.level += value;
+        break;
+    case StatType::MANA:
+        this->stats.mana += value;
+        break;
+    case StatType::MAX_MANA:
+        this->stats.maxMana += value;
         break;
     default:
         return false;
@@ -192,13 +204,14 @@ float AbstractPlayer::getStat(StatType stat) const noexcept {
         return this->stats.hunger;
     case StatType::MAX_HEALTH:
         return this->stats.maxHealth;
-        break;
     case StatType::MAX_HUNGER:
         return this->stats.maxHunger;
-        break;
     case StatType::ARMOR:
         return (wearedEquipment.armor.head->calculateArmor() + wearedEquipment.armor.body->calculateArmor() + wearedEquipment.armor.legs->calculateArmor() + wearedEquipment.armor.boots->calculateArmor()) / 2;
-        break;
+    case StatType::MANA:
+        return this->stats.mana;
+    case StatType::MAX_MANA:
+        return this->stats.maxMana;
     default:
         return 0;
     }
@@ -233,5 +246,40 @@ void AbstractPlayer::addEffect(AbstractEffect* effect) noexcept {
 void AbstractPlayer::deleteEffect(AbstractEffect* effect) noexcept {
     if(auto it = std::find(effects.begin(), effects.end(), effect); it != effects.end()) {
         effects.erase(it);
+    }
+}
+
+std::unordered_map<AbstractMagic*, int>& AbstractPlayer::getSpells() noexcept {
+    return spells;
+}
+
+void AbstractPlayer::addSpell(AbstractMagic* spell) noexcept {
+    if(spells.find(spell) == spells.end()) {
+        spells[spell] = 0;
+    }
+}
+
+void AbstractPlayer::deleteSpell(AbstractMagic* spell) noexcept {
+    if(spells.find(spell) != spells.end()) {
+        spells.erase(spell);
+    }
+}
+
+bool AbstractPlayer::canCast(AbstractMagic* spell) const noexcept {
+    if(auto it = spells.find(spell); it != spells.end()) {
+        if((*it).second == 0) {
+            return true;
+        }
+    }
+    return false;
+}
+
+void AbstractPlayer::spellCasted(AbstractMagic* spell) noexcept {
+    spells.at(spell) = spell->getCooldown();
+}
+
+void AbstractPlayer::castSpell(AbstractMagic* spell, AbstractPlayer* victim) noexcept {
+    if(auto it = spells.find(spell); it != spells.end()) {
+        ((*it).first)->use(this, victim);
     }
 }

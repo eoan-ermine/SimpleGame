@@ -16,7 +16,7 @@ struct MyHash {
 
 enum class Direction { NORTH, SOUTH, EAST, WEST };
 
-enum ItemType { ITEM, EQUIPMENT };
+enum ItemType { ITEM, EQUIPMENT, MAGIC };
 enum class EquipmentType {WEAPON, ARMOR};
 
 enum class ArmorType {NONE, HEAD, BODY, LEGS, BOOTS};
@@ -27,5 +27,5 @@ struct Penetration {
 };
 
 enum class StatType {
-    HEALTH, HUNGER, MAX_HEALTH, MAX_HUNGER, ACCURACY, EVASION, STRENGTH, EXPERIENCE, LEVEL, ARMOR
+    HEALTH, HUNGER, MAX_HEALTH, MAX_HUNGER, ACCURACY, EVASION, STRENGTH, EXPERIENCE, LEVEL, ARMOR, MANA, MAX_MANA
 };

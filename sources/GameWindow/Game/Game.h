@@ -13,6 +13,8 @@
 #include "../../Player/AbstractPlayer/AbstractPlayer.h"
 #include "../../Utility/Utility.h"
 
+#include "../../Item/Magic/DamageSpell/DamageSpell.h"
+
 class Game {
 private:
     AbstractMaze* spawnMaze;
@@ -36,6 +38,11 @@ public:
     AbstractRoom* getSpawnRoom() const noexcept;
     AbstractPlayer* getPlayer() const noexcept;
 
+    void updateCooldowns();
     void updateEffects();
+
     void writeHunger();
+    void writeHealth();
+
+    void attackYourselfWithDamageSpell();
 };

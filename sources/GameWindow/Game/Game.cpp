@@ -4,6 +4,8 @@ Game::Game(): spawnMaze(new AbstractMaze()), spawnRoom(new AbstractRoom()), play
     spawnMaze->addRoom(spawnRoom);
     player->setRoom(spawnRoom);
 
+    player->addSpell(new DamageSpell());
+
     gameObjects[ObjectType::MAZE].push_back(spawnMaze);
     gameObjects[ObjectType::ROOM].push_back(spawnRoom);
     gameObjects[ObjectType::PLAYER].push_back(player);
@@ -29,8 +31,10 @@ void Game::deleteObject(ObjectType type, GameObject* toDelete) noexcept {
 }
 
 void Game::update() {
+    this->updateCooldowns();
     this->updateEffects();
-    this->writeHunger();
+
+
 }
 
 void Game::updateEffects() {
@@ -53,8 +57,32 @@ void Game::updateEffects() {
     }
 }
 
+void Game::updateCooldowns() {
+    for(GameObject* object: gameObjects[ObjectType::PLAYER]) {
+        AbstractPlayer* player = dynamic_cast<AbstractPlayer*>(object);
+        if(player == nullptr) {
+            throw std::runtime_error("Excepted AbstractPlayer got other class");
+        }
+        for(std::pair<AbstractMagic*, int> spell: player->getSpells()) {
+            if(spell.second > 0) {
+                spell.second -= 1;
+            }
+        }
+    }
+}
+
+void Game::writeHealth() {
+    std::cout << "Current health: " << this->player->getStat(StatType::HEALTH) << std::endl;
+}
+
 void Game::writeHunger() {
-    std::cout << this->player->getStat(StatType::HUNGER) << std::endl;
+    std::cout << "Current hunger: " << this->player->getStat(StatType::HUNGER) << std::endl;
+}
+
+
+void Game::attackYourselfWithDamageSpell() {
+    this->castSpell()
+    // Okay, I'll do it later.
 }
 
 

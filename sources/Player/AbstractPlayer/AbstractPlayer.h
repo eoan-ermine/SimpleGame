@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vector>
+#include <unordered_map>
 #include <algorithm>
 
 #include "../../Maze/MazeSystem/AbstractMaze/AbstractMaze.h"
@@ -12,6 +13,7 @@
 #include "../../Item/Equipment/AbstractWeapon/AbstractWeapon.h"
 #include "../../Item/Equipment/AbstractArmor/AbstractArmor.h"
 #include "../../GameWindow/Game/GameObject/GameObject.h"
+#include "../../Item/Magic/AbstractMagic/AbstractMagic.h"
 
 class AbstractPlayer: public GameObject {
 private:
@@ -20,7 +22,8 @@ private:
 
     struct {
         float health=100, hunger=100, maxHealth=100, maxHunger=100;
-        int accuracy=10, evasion=10, strength=10, experience=0, level=1;
+        int accuracy=10, evasion=10, strength=10, experience=0, level=1,
+            maxMana = 100, mana = 100;
     } stats;
 
     struct {
@@ -33,6 +36,8 @@ private:
     } wearedEquipment;
 
     std::vector<AbstractEffect*> effects;
+    std::unordered_map<AbstractMagic*, int> spells;
+
     Inventory inventory;
 public:
     AbstractPlayer();
@@ -66,4 +71,13 @@ public:
     std::vector<AbstractEffect*>& getEffects() noexcept;
     void addEffect(AbstractEffect* effect) noexcept;
     void deleteEffect(AbstractEffect* effect) noexcept;
+
+    std::unordered_map<AbstractMagic*, int>& getSpells() noexcept;
+    void addSpell(AbstractMagic* spell) noexcept;
+    void deleteSpell(AbstractMagic* spell) noexcept;
+
+    void castSpell(AbstractMagic* spell, AbstractPlayer* victim) noexcept;
+    bool canCast(AbstractMagic* spell) const noexcept;
+    void spellCasted(AbstractMagic* spell) noexcept;
+
 };
