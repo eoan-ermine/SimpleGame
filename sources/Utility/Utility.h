@@ -2,8 +2,8 @@
 
 #include <cmath>
 
+enum class ObjectType { MAZE, ROOM, DOOR, EFFECT, PLAYER, ITEM };
 enum class RoomType { STANDARD };
-
 enum class MazeType { STANDARD };
 
 template<typename Tval>

@@ -1,11 +1,12 @@
 #pragma once
 
 #include "../../Utility/Utility.h"
+#include "../../GameWindow/Game/GameObject/GameObject.h"
 
 class AbstractRoom;
 class AbstractPlayer;
 
-class Door {
+class Door: public GameObject {
 private:
     AbstractRoom *source, *destination;
     Direction direction;

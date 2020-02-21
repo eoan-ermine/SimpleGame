@@ -5,13 +5,14 @@
 #include <SFML/Audio.hpp>
 
 #include "../Utility/LinesVector.h"
+#include "Game/Game.h"
 
 class GameWindow {
+    Game game;
     sf::RenderWindow window;
     sf::Font font;
 
     LinesVector guiBorder;
-
     sf::Text inventoryLabel;
 public:
     GameWindow();
@@ -23,4 +24,5 @@ public:
     void drawLabels();
 
     void show();
+    Game* getGame();
 };

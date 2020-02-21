@@ -2,10 +2,11 @@
 
 #include "../../Utility/Utility.h"
 #include "../Item.h"
+#include "../../GameWindow/Game/GameObject/GameObject.h"
 
 #include <unordered_map>
 
-class Inventory {
+class Inventory: public GameObject {
 private:
     MyHash<Item> hash;
     std::unordered_map<std::size_t, Item*> inventory;

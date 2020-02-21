@@ -221,3 +221,17 @@ bool AbstractPlayer::getItem(Item* item) noexcept {
     }
     return false;
 }
+
+std::vector<AbstractEffect*>& AbstractPlayer::getEffects() noexcept {
+    return effects;
+}
+
+void AbstractPlayer::addEffect(AbstractEffect* effect) noexcept {
+    effects.push_back(effect);
+}
+
+void AbstractPlayer::deleteEffect(AbstractEffect* effect) noexcept {
+    if(auto it = std::find(effects.begin(), effects.end(), effect); it != effects.end()) {
+        effects.erase(it);
+    }
+}

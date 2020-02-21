@@ -4,10 +4,11 @@
 #include <string_view>
 
 #include "../Utility/Utility.h"
+#include "../GameWindow/Game/GameObject/GameObject.h"
 
 class AbstractPlayer;
 
-class Item {
+class Item: public GameObject {
 private:
     std::string name;
     std::string description;

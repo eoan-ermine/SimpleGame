@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vector>
+#include <algorithm>
 
 #include "../../Maze/MazeSystem/Maze/Maze.h"
 #include "../../Maze/RoomSystem/AbstractRoom/AbstractRoom.h"
@@ -10,9 +11,9 @@
 
 #include "../../Item/Equipment/AbstractWeapon/AbstractWeapon.h"
 #include "../../Item/Equipment/AbstractArmor/AbstractArmor.h"
+#include "../../GameWindow/Game/GameObject/GameObject.h"
 
-
-class AbstractPlayer {
+class AbstractPlayer: public GameObject {
 private:
     Maze* currentMaze = nullptr;
     AbstractRoom* currentRoom = nullptr;
@@ -61,4 +62,8 @@ public:
     Inventory* getInventory() noexcept;
     bool dropItem(Item* item) noexcept;
     bool getItem(Item* item) noexcept;
+
+    std::vector<AbstractEffect*>& getEffects() noexcept;
+    void addEffect(AbstractEffect* effect) noexcept;
+    void deleteEffect(AbstractEffect* effect) noexcept;
 };

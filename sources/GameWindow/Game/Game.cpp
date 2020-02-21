@@ -1,44 +1,92 @@
 #include "Game.h"
 
-Game::Game(): spawnMaze(new Maze()), spawnRoom(new AbstractRoom()), player(new AbstractPlayer())  {
+Game::Game(): spawnMaze(new Maze()), spawnRoom(new AbstractRoom()), player(new AbstractPlayer()) {
     spawnMaze->addRoom(spawnRoom);
     player->setRoom(spawnRoom);
 
-    gameMazes.push_back(spawnMaze);
-    gameRooms.push_back(spawnRoom);
-    gamePlayers.push_back(player);
+    gameObjects[ObjectType::MAZE].push_back(spawnMaze);
+    gameObjects[ObjectType::ROOM].push_back(spawnRoom);
+    gameObjects[ObjectType::PLAYER].push_back(player);
 }
 
 Game::~Game() {
-    for(auto& x: gameMazes) {
-        delete x;
-    }
-    for(auto& x: gameRooms) {
-        delete x;
-    }
-    for(auto& x: gamePlayers) {
-        delete x;
-    }
-    for(auto& x: gameItems) {
-        delete x;
-    }
-
-}
-
-void Game::deleteMaze(Maze* toDelete) {
-    if(auto it = std::find(gameMazes.begin(), gameMazes.end(), toDelete); it != gameMazes.end()) {
-        gameMazes.erase(it);
+    for(auto& pair: gameObjects) {
+        for(auto& element: pair.second) {
+            delete element;
+        }
     }
 }
 
-void Game::deleteRoom(AbstractRoom* toDelete) {
-    if(auto it = std::find(gameRooms.begin(), gameRooms.end(), toDelete); it != gameRooms.end()) {
-        gameRooms.erase(it);
+void Game::addObject(ObjectType type, GameObject* object) noexcept {
+    gameObjects[type].push_back(object);
+}
+
+void Game::deleteObject(ObjectType type, GameObject* toDelete) noexcept {
+    std::vector<GameObject*>& categoryRef = gameObjects[type];
+    if(auto it = std::find(categoryRef.begin(), categoryRef.end(), toDelete); it != categoryRef.end()) {
+        categoryRef.erase(it);
     }
 }
 
-void Game::deleteItem(Item* toDelete) {
-    if(auto it = std::find(gameItems.begin(), gameItems.end(), toDelete); it != gameItems.end()) {
-        gameItems.erase(it);
+void Game::update() {
+    this->updateEffects();
+    this->writeHunger();
+}
+
+void Game::updateEffects() {
+    std::vector<std::pair<ObjectType, GameObject*>> toDelete;
+    for(GameObject* object: gameObjects[ObjectType::PLAYER]) {
+        AbstractPlayer* player = dynamic_cast<AbstractPlayer*>(object);
+        for(AbstractEffect* effect: player->getEffects()) {
+            if(effect->getRemains() > 0) {
+                effect->action(player);
+            } else {
+                toDelete.push_back({ObjectType::EFFECT, dynamic_cast<GameObject*>(effect)});
+            }
+        }
     }
+    for(auto pair: toDelete) {
+        this->deleteObject(pair.first, pair.second);
+    }
+}
+
+void Game::writeHunger() {
+    std::cout << this->player->getStat(StatType::HUNGER) << std::endl;
+}
+
+
+void Game::changeSpawnMaze(Maze* newMaze) noexcept {
+    std::vector<GameObject*>& category = gameObjects[ObjectType::MAZE];
+    if(auto it = std::find(category.begin(), category.end(), newMaze); it == category.end()) {
+        category.push_back(newMaze);
+    }
+    spawnMaze = newMaze;
+}
+
+void Game::changeSpawnRoom(AbstractRoom* newRoom) noexcept {
+    std::vector<GameObject*>& category = gameObjects[ObjectType::ROOM];
+    if(auto it = std::find(category.begin(), category.end(), newRoom); it == category.end()) {
+        category.push_back(newRoom);
+    }
+    spawnRoom = newRoom;
+}
+
+void Game::changePlayer(AbstractPlayer* newPlayer) noexcept {
+    std::vector<GameObject*>& category = gameObjects[ObjectType::PLAYER];
+    if(auto it = std::find(category.begin(), category.end(), newPlayer); it == category.end()) {
+        category.push_back(newPlayer);
+    }
+    player = newPlayer;
+}
+
+Maze* Game::getSpawnMaze() const noexcept {
+    return spawnMaze;
+}
+
+AbstractRoom* Game::getSpawnRoom() const noexcept {
+    return spawnRoom;
+}
+
+AbstractPlayer* Game::getPlayer() const noexcept {
+    return player;
 }

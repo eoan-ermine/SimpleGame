@@ -1,7 +1,7 @@
 #include "GameWindow.h"
 
 GameWindow::GameWindow(): window(sf::VideoMode(800, 600), "SimpleGame") {
-    if(!font.loadFromFile("/home/user/Рабочий стол/SimpleGame/resources/fonts/Cantarell-Regular.otf")) {
+    if(!font.loadFromFile("/home/user/SimpleGame/resources/fonts/Cantarell-Regular.otf")) {
         throw std::runtime_error("Can't load font");
     }
 
@@ -18,7 +18,7 @@ GameWindow::~GameWindow() {
 }
 
 void GameWindow::everyTick() {
-    // Execute every-tick functions
+    this->game.update();
 }
 
 void GameWindow::drawGUIBorders() {
@@ -40,9 +40,17 @@ void GameWindow::show() {
         }
         window.clear(sf::Color::Black);
 
+        if(clock.getElapsedTime().asMilliseconds() > 500) {
+            this->everyTick();
+            clock.restart();
+        }
         this->drawGUIBorders();
         this->drawLabels();
 
         window.display();
     }
+}
+
+Game* GameWindow::getGame() {
+    return &(this->game);
 }

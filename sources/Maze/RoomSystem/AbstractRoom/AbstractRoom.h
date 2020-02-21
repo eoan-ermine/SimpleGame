@@ -5,10 +5,11 @@
 #include "../../DoorSystem/Door.h"
 #include "../../../Utility/Utility.h"
 #include "../../../Item/Inventory/Inventory.h"
+#include "../../../GameWindow/Game/GameObject/GameObject.h"
 
 #include <unordered_map>
 
-class AbstractRoom {
+class AbstractRoom: public GameObject {
 private:
     MyHash<Door> hash;
     std::unordered_map<std::size_t, Door*> doors;
