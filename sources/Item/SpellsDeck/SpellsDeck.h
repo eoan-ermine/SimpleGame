@@ -16,8 +16,6 @@ public:
     std::unordered_map<AbstractMagic*, int>& getSpells() noexcept;
     void addSpell(AbstractMagic* spell) noexcept;
     void deleteSpell(AbstractMagic* spell) noexcept;
-
-    bool canCast(AbstractMagic* spell) const noexcept;
     void spellCasted(AbstractMagic* spell) noexcept;
 
     bool contains(AbstractMagic* key) const noexcept;
@@ -28,4 +26,7 @@ public:
 
     std::unordered_map<AbstractMagic*, int>::iterator begin();
     std::unordered_map<AbstractMagic*, int>::iterator end();
+
+    int getCooldown(AbstractMagic* spell) noexcept;
+    int getCooldown(std::string name) noexcept;
 };

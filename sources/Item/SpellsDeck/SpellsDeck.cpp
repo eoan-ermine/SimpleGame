@@ -16,13 +16,6 @@ void SpellsDeck::deleteSpell(AbstractMagic* spell) noexcept {
     this->spells.erase(spell);
 }
 
-bool SpellsDeck::canCast(AbstractMagic* spell) const noexcept {
-    if(auto it = this->spells.find(spell); it != spells.end() and (*it).second == 0) {
-        return true;
-    }
-    return false;
-}
-
 void SpellsDeck::spellCasted(AbstractMagic* spell) noexcept {
     this->spells[spell] = spell->getCooldown();
 }
@@ -63,4 +56,16 @@ std::unordered_map<AbstractMagic*, int>::iterator SpellsDeck::begin() {
 
 std::unordered_map<AbstractMagic*, int>::iterator SpellsDeck::end() {
     return spells.end();
+}
+
+int SpellsDeck::getCooldown(std::string name) noexcept {
+    auto predicate = [&name](auto pair) {
+        return pair.first->getName() == name;
+    };
+    auto it = std::find_if(spells.begin(), spells.end(), predicate);
+    return (it == spells.end() ? 100 : (*it).second);
+}
+
+int SpellsDeck::getCooldown(AbstractMagic* spell) noexcept {
+    return (this->contains(spell) ? spells[spell] : 100);
 }

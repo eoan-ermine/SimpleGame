@@ -73,6 +73,7 @@ public:
     void deleteEffect(AbstractEffect* effect) noexcept;
 
     SpellsDeck& getSpells() noexcept;
+    bool canCast(AbstractMagic* spell) noexcept;
     void castSpell(std::string spellName, AbstractPlayer* victim) noexcept;
     void castSpell(AbstractMagic* spell, AbstractPlayer* victim) noexcept;
 };

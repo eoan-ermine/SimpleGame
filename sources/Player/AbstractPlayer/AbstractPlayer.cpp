@@ -254,13 +254,19 @@ SpellsDeck& AbstractPlayer::getSpells() noexcept {
 }
 
 void AbstractPlayer::castSpell(std::string spellName, AbstractPlayer* victim) noexcept {
-    if(auto it = this->spells[spellName]; it != nullptr) {
-        it->use(this, victim);
-    }
+    spells[spellName]->use(this, victim);
 }
 
 void AbstractPlayer::castSpell(AbstractMagic* spell, AbstractPlayer* victim) noexcept {
-    if(this->spells.contains(spell)) {
+    if(this->canCast(spell)) {
         spell->use(this, victim);
     }
+}
+
+bool AbstractPlayer::canCast(AbstractMagic* spell) noexcept {
+    if(spells.contains(spell) and spells.getCooldown(spell) == 0 and stats.mana > spell->getManaCost()) {
+        return true;
+    }
+    return false;
+
 }

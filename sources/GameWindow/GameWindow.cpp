@@ -1,7 +1,7 @@
 #include "GameWindow.h"
 
 GameWindow::GameWindow(): window(sf::VideoMode(800, 600), "SimpleGame") {
-    if(!font.loadFromFile("/home/user/SimpleGame/resources/fonts/Cantarell-Regular.otf")) {
+    if(!font.loadFromFile("/home/user/Программирование/SimpleGame/resources/fonts/Cantarell-Regular.otf")) {
         throw std::runtime_error("Can't load font");
     }
 

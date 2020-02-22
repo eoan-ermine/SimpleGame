@@ -25,9 +25,7 @@ void AbstractMagic::action(AbstractPlayer* lhs, AbstractPlayer* rhs) { }
 
 void AbstractMagic::use(AbstractPlayer* lhs, AbstractPlayer* rhs) {
     SpellsDeck& spellsDeck = lhs->getSpells();
-    if(spellsDeck.canCast(this)) {
-        this->action(lhs, rhs);
-        lhs->changeStat(StatType::MANA, -manaCost);
-        spellsDeck.spellCasted(this);
-    }
+    this->action(lhs, rhs);
+    lhs->changeStat(StatType::MANA, -manaCost);
+    spellsDeck.spellCasted(this);
 }
