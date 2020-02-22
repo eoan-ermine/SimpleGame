@@ -1,6 +1,7 @@
 #include "AbstractMagic.h"
 
 #include "../../../Player/AbstractPlayer/AbstractPlayer.h"
+#include "../../SpellsDeck/SpellsDeck.h"
 
 AbstractMagic::AbstractMagic(int manaCost, int coolDown): Item("Default name", "Default description", ItemType::MAGIC) {
     this->manaCost = manaCost;
@@ -23,9 +24,10 @@ int AbstractMagic::getCooldown() {
 void AbstractMagic::action(AbstractPlayer* lhs, AbstractPlayer* rhs) { }
 
 void AbstractMagic::use(AbstractPlayer* lhs, AbstractPlayer* rhs) {
-    if(lhs->canCast(this)) {
+    SpellsDeck& spellsDeck = lhs->getSpells();
+    if(spellsDeck.canCast(this)) {
         this->action(lhs, rhs);
         lhs->changeStat(StatType::MANA, -manaCost);
-        lhs->spellCasted(this);
+        spellsDeck.spellCasted(this);
     }
 }

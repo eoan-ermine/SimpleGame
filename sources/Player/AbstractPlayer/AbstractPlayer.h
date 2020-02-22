@@ -14,6 +14,7 @@
 #include "../../Item/Equipment/AbstractArmor/AbstractArmor.h"
 #include "../../GameWindow/Game/GameObject/GameObject.h"
 #include "../../Item/Magic/AbstractMagic/AbstractMagic.h"
+#include "../../Item/SpellsDeck/SpellsDeck.h"
 
 class AbstractPlayer: public GameObject {
 private:
@@ -36,9 +37,8 @@ private:
     } wearedEquipment;
 
     std::vector<AbstractEffect*> effects;
-    std::unordered_map<AbstractMagic*, int> spells;
-
     Inventory inventory;
+    SpellsDeck spells;
 public:
     AbstractPlayer();
     AbstractPlayer(float health, float hunger);
@@ -72,12 +72,7 @@ public:
     void addEffect(AbstractEffect* effect) noexcept;
     void deleteEffect(AbstractEffect* effect) noexcept;
 
-    std::unordered_map<AbstractMagic*, int>& getSpells() noexcept;
-    void addSpell(AbstractMagic* spell) noexcept;
-    void deleteSpell(AbstractMagic* spell) noexcept;
-
+    SpellsDeck& getSpells() noexcept;
+    void castSpell(std::string spellName, AbstractPlayer* victim) noexcept;
     void castSpell(AbstractMagic* spell, AbstractPlayer* victim) noexcept;
-    bool canCast(AbstractMagic* spell) const noexcept;
-    void spellCasted(AbstractMagic* spell) noexcept;
-
 };

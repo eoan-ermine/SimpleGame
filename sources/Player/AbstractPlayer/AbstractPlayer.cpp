@@ -249,37 +249,18 @@ void AbstractPlayer::deleteEffect(AbstractEffect* effect) noexcept {
     }
 }
 
-std::unordered_map<AbstractMagic*, int>& AbstractPlayer::getSpells() noexcept {
+SpellsDeck& AbstractPlayer::getSpells() noexcept {
     return spells;
 }
 
-void AbstractPlayer::addSpell(AbstractMagic* spell) noexcept {
-    if(spells.find(spell) == spells.end()) {
-        spells[spell] = 0;
+void AbstractPlayer::castSpell(std::string spellName, AbstractPlayer* victim) noexcept {
+    if(auto it = this->spells[spellName]; it != nullptr) {
+        it->use(this, victim);
     }
-}
-
-void AbstractPlayer::deleteSpell(AbstractMagic* spell) noexcept {
-    if(spells.find(spell) != spells.end()) {
-        spells.erase(spell);
-    }
-}
-
-bool AbstractPlayer::canCast(AbstractMagic* spell) const noexcept {
-    if(auto it = spells.find(spell); it != spells.end()) {
-        if((*it).second == 0) {
-            return true;
-        }
-    }
-    return false;
-}
-
-void AbstractPlayer::spellCasted(AbstractMagic* spell) noexcept {
-    spells.at(spell) = spell->getCooldown();
 }
 
 void AbstractPlayer::castSpell(AbstractMagic* spell, AbstractPlayer* victim) noexcept {
-    if(auto it = spells.find(spell); it != spells.end()) {
-        ((*it).first)->use(this, victim);
+    if(this->spells.contains(spell)) {
+        spell->use(this, victim);
     }
 }

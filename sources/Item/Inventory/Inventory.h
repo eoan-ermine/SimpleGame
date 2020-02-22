@@ -4,25 +4,28 @@
 #include "../Item.h"
 #include "../../GameWindow/Game/GameObject/GameObject.h"
 
-#include <unordered_map>
+#include <stdexcept>
+#include <algorithm>
+#include <vector>
 
 class Inventory: public GameObject {
 private:
-    MyHash<Item> hash;
-    std::unordered_map<std::size_t, Item*> inventory;
+    std::vector<Item*> items;
 public:
     Inventory();
     ~Inventory();
 
-    const std::unordered_map<std::size_t, Item*>& getItems() const noexcept;
+    const std::vector<Item*>& getItems() const noexcept;
 
     void addItem(Item* item) noexcept;
     void deleteItem(Item* item) noexcept;
     void reset() noexcept;
 
     std::size_t size() const noexcept;
+
+    bool contains(std::string name);
     bool contains(Item* key) const noexcept;
 
-    Item* getItem(size_t hash) const;
-    Item* operator[](size_t hash) const noexcept;
+    Item* getItem(std::string name) const;
+    Item* operator[](std::string name) const noexcept;
 };

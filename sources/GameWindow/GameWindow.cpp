@@ -37,6 +37,11 @@ void GameWindow::show() {
             if (event.type == sf::Event::Closed) {
                 window.close();
             }
+            if(event.type == sf::Event::KeyPressed) {
+                if(event.key.code == sf::Keyboard::Num0) {
+                    this->game.attackYourselfWithDamageSpell();
+                }
+            }
         }
         window.clear(sf::Color::Black);
 

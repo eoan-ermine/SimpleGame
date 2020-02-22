@@ -6,43 +6,61 @@ Inventory::Inventory() {
 Inventory::~Inventory() {
 }
 
+const std::vector<Item*>& Inventory::getItems() const noexcept {
+    return this->items;
+}
 
 void Inventory::addItem(Item* item) noexcept {
-    inventory.insert({hash(item), item});
+    items.push_back(item);
 }
 
 void Inventory::deleteItem(Item* item) noexcept {
-    inventory.erase(hash(item));
+    if(auto it = std::find(items.begin(), items.end(), item); it != items.end()) {
+        items.erase(it);
+    }
 }
 
 void Inventory::reset() noexcept {
-    inventory.clear();
+    items.clear();
 }
 
 std::size_t Inventory::size() const noexcept {
-    return inventory.size();
+    return items.size();
+}
+
+bool Inventory::contains(std::string name) {
+    auto predicate = [&name](Item* item) {
+        return item->getName() == name;
+    };
+    if(auto it = std::find_if(items.begin(), items.end(), predicate); it != items.end()) {
+        return true;
+    }
+    return false;
 }
 
 bool Inventory::contains(Item* key) const noexcept {
-    return inventory.find(hash(key)) != inventory.end();
-}
-
-const std::unordered_map<std::size_t, Item*>& Inventory::getItems() const noexcept {
-    return inventory;
-}
-
-Item* Inventory::getItem(size_t hash) const {
-    if(auto it = inventory.find(hash); it != inventory.end()) {
-        return (*it).second;
-    } else {
-        throw std::out_of_range("Can't found item with provided hash");
+    if(auto it = std::find(items.begin(), items.end(), key); it != items.end()) {
+        return true;
     }
+    return false;
 }
 
-Item* Inventory::operator[](size_t hash) const noexcept {
-    if(auto it = inventory.find(hash); it != inventory.end()) {
-        return (*it).second;
-    } else {
-        return nullptr;
+Item* Inventory::getItem(std::string name) const {
+    auto predicate = [&name](Item* item) {
+        return item->getName() == name;
+    };
+    if(auto it = std::find_if(items.begin(), items.end(), predicate); it != items.end()) {
+        return *it;
     }
+    throw std::runtime_error("Can't find spell with provided name");
+}
+
+Item* Inventory::operator[](std::string name) const noexcept {
+    auto predicate = [&name](Item* item) {
+        return item->getName() == name;
+    };
+    if(auto it = std::find_if(items.begin(), items.end(), predicate); it != items.end()) {
+        return *it;
+    }
+    return nullptr;
 }

@@ -4,7 +4,10 @@ Game::Game(): spawnMaze(new AbstractMaze()), spawnRoom(new AbstractRoom()), play
     spawnMaze->addRoom(spawnRoom);
     player->setRoom(spawnRoom);
 
-    player->addSpell(new DamageSpell());
+    DamageSpell* damageSpell = new DamageSpell();
+    gameObjects[ObjectType::ITEM].push_back(damageSpell);
+
+    player->getSpells().addSpell(damageSpell);
 
     gameObjects[ObjectType::MAZE].push_back(spawnMaze);
     gameObjects[ObjectType::ROOM].push_back(spawnRoom);
@@ -33,8 +36,7 @@ void Game::deleteObject(ObjectType type, GameObject* toDelete) noexcept {
 void Game::update() {
     this->updateCooldowns();
     this->updateEffects();
-
-
+    this->writeHealth();
 }
 
 void Game::updateEffects() {
@@ -63,7 +65,7 @@ void Game::updateCooldowns() {
         if(player == nullptr) {
             throw std::runtime_error("Excepted AbstractPlayer got other class");
         }
-        for(std::pair<AbstractMagic*, int> spell: player->getSpells()) {
+        for(auto& spell: player->getSpells()) {
             if(spell.second > 0) {
                 spell.second -= 1;
             }
@@ -81,8 +83,8 @@ void Game::writeHunger() {
 
 
 void Game::attackYourselfWithDamageSpell() {
-    this->castSpell()
-    // Okay, I'll do it later.
+    AbstractMagic* spell = this->player->getSpells()["Damage spell"];
+    this->player->castSpell(spell, this->player);
 }
 
 
