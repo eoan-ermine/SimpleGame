@@ -1,9 +1,7 @@
 #include "GameWindow.h"
 
 GameWindow::GameWindow(): window(sf::VideoMode(800, 600), "SimpleGame") {
-    if(!font.loadFromFile("/home/user/Программирование/SimpleGame/resources/fonts/Cantarell-Regular.otf")) {
-        throw std::runtime_error("Can't load font");
-    }
+    this->loadResources();
 
     this->guiBorder = {sf::Vertex(sf::Vector2f(0.0f, 500.0f)), sf::Vertex(sf::Vector2f(800.0f, 500.0f)), sf::Vertex(sf::Vector2f(600.0f, 500.0f)), sf::Vertex(sf::Vector2f(600.0f, 200.0f)), sf::Vertex(sf::Vector2f(600.0f, 200.0f)), sf::Vertex(sf::Vector2f(800.0f, 200.0f)), sf::Vertex(sf::Vector2f(600.0f, 200.0f)), sf::Vertex(sf::Vector2f(600.0f, 0.0f)), sf::Vertex(sf::Vector2f(600.0f, 220.0f)), sf::Vertex(sf::Vector2f(800.0f, 220.0f))};
 
@@ -15,10 +13,6 @@ GameWindow::GameWindow(): window(sf::VideoMode(800, 600), "SimpleGame") {
 }
 
 GameWindow::~GameWindow() {
-}
-
-void GameWindow::everyTick() {
-    this->game.update();
 }
 
 void GameWindow::drawGUIBorders() {
@@ -56,6 +50,8 @@ void GameWindow::show() {
     }
 }
 
-Game* GameWindow::getGame() {
-    return &(this->game);
+void GameWindow::loadResources() {
+    if(!font.loadFromFile("/home/user/Программирование/SimpleGame/resources/fonts/Cantarell-Regular.otf")) {
+        throw std::runtime_error("Can't load font");
+    }
 }

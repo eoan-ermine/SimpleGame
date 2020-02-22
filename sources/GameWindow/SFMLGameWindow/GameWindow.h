@@ -4,11 +4,10 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 
-#include "../Utility/LinesVector.h"
-#include "Game/Game.h"
+#include "../../Utility/LinesVector.h"
+#include "../AbstractGameWindow/AbstractGameWindow.h"
 
-class GameWindow {
-    Game game;
+class GameWindow: public AbstractGameWindow {
     sf::RenderWindow window;
     sf::Font font;
 
@@ -18,11 +17,9 @@ public:
     GameWindow();
     ~GameWindow();
 
-    void everyTick();
-
+    void loadResources();
     void drawGUIBorders();
     void drawLabels();
 
     void show();
-    Game* getGame();
 };

@@ -36,7 +36,9 @@ void Game::deleteObject(ObjectType type, GameObject* toDelete) noexcept {
 void Game::update() {
     this->updateCooldowns();
     this->updateEffects();
-    this->writeHealth();
+    this->updateMana();
+
+    this->writeMainStats();
 }
 
 void Game::updateEffects() {
@@ -73,12 +75,21 @@ void Game::updateCooldowns() {
     }
 }
 
-void Game::writeHealth() {
-    std::cout << "Current health: " << this->player->getStat(StatType::HEALTH) << std::endl;
+void Game::updateMana() {
+    for(GameObject* object: gameObjects[ObjectType::PLAYER]) {
+        AbstractPlayer* player = dynamic_cast<AbstractPlayer*>(object);
+        if(player == nullptr) {
+            throw std::runtime_error("Excepted AbstractPlayer got other class");
+        }
+        if(player->getStat(StatType::MANA) != player->getStat(StatType::MAX_MANA)) {
+            player->changeStat(StatType::MANA, 1);
+        }
+    }
 }
 
-void Game::writeHunger() {
-    std::cout << "Current hunger: " << this->player->getStat(StatType::HUNGER) << std::endl;
+void Game::writeMainStats() {
+    std::cout << "Current health: " << this->player->getStat(StatType::HEALTH) << std::endl;
+    std::cout << "Current mana: " << this->player->getStat(StatType::MANA) << std::endl;
 }
 
 

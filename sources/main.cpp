@@ -1,8 +1,8 @@
-#include "GameWindow/GameWindow.h"
+#include "GameWindow/TextGameWindow/TextGameWindow.h"
 #include "Player/AbstractMonster/AbstractMonster.h"
 
 int main() {
-    GameWindow window;
+    TextGameWindow window;
     window.show();
 
     window.getGame()->changePlayer(new AbstractMonster());

@@ -40,9 +40,9 @@ public:
 
     void updateCooldowns();
     void updateEffects();
+    void updateMana();
 
-    void writeHunger();
-    void writeHealth();
+    void writeMainStats();
 
     void attackYourselfWithDamageSpell();
 };
