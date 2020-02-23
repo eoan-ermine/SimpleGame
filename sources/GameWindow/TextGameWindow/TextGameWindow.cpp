@@ -1,7 +1,10 @@
 #include "TextGameWindow.h"
 
-TextGameWindow::TextGameWindow() { }
+TextGameWindow::TextGameWindow(): windowIsOpen(true) { }
 
 TextGameWindow::~TextGameWindow() { }
 
-void TextGameWindow::show() { }
+void TextGameWindow::show() {
+	sf::Clock clock;
+	while(windowIsOpen) { }
+}

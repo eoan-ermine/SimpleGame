@@ -69,3 +69,9 @@ int SpellsDeck::getCooldown(std::string name) noexcept {
 int SpellsDeck::getCooldown(AbstractMagic* spell) noexcept {
     return (this->contains(spell) ? spells[spell] : 100);
 }
+
+void cast(AbstractMagic* spell, AbstractPlayer* lhs, AbstractPlayer* rhs) {
+    spell->action(lhs, rhs);
+    lhs->changeStat(StatType::MANA, -manaCost);
+    this->spellCasted(this);
+}

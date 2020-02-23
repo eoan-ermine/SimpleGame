@@ -24,8 +24,5 @@ int AbstractMagic::getCooldown() {
 void AbstractMagic::action(AbstractPlayer* lhs, AbstractPlayer* rhs) { }
 
 void AbstractMagic::use(AbstractPlayer* lhs, AbstractPlayer* rhs) {
-    SpellsDeck& spellsDeck = lhs->getSpells();
     this->action(lhs, rhs);
-    lhs->changeStat(StatType::MANA, -manaCost);
-    spellsDeck.spellCasted(this);
 }

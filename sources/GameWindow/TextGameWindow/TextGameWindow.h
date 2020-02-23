@@ -4,6 +4,8 @@
 
 class TextGameWindow: public AbstractGameWindow {
 public:
+	bool windowIsOpen;
+
     TextGameWindow();
     ~TextGameWindow();
 public:

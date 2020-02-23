@@ -20,5 +20,5 @@ public:
     WeaponType getWeaponType();
     float getDamage();
 
-    void use(AbstractPlayer* lhs, AbstractPlayer* rhs) override;
+    virtual void use(AbstractPlayer* lhs, AbstractPlayer* rhs) override;
 };

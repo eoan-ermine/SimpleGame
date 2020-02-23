@@ -29,4 +29,6 @@ public:
 
     int getCooldown(AbstractMagic* spell) noexcept;
     int getCooldown(std::string name) noexcept;
+	
+	void cast(AbstractMagic* spell, AbstractPlayer* lhs, AbstractPlayer* rhs);
 };

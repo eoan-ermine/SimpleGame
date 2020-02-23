@@ -254,12 +254,14 @@ SpellsDeck& AbstractPlayer::getSpells() noexcept {
 }
 
 void AbstractPlayer::castSpell(std::string spellName, AbstractPlayer* victim) noexcept {
-    spells[spellName]->use(this, victim);
+	if(this->canCast(spell)) {
+		this->spells.cast(spells[spellName], this, victim);
+	}
 }
 
 void AbstractPlayer::castSpell(AbstractMagic* spell, AbstractPlayer* victim) noexcept {
     if(this->canCast(spell)) {
-        spell->use(this, victim);
+		this->spells.cast(spell, this, victim);
     }
 }
 
@@ -268,5 +270,4 @@ bool AbstractPlayer::canCast(AbstractMagic* spell) noexcept {
         return true;
     }
     return false;
-
 }
