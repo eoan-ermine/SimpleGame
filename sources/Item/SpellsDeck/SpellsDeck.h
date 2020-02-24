@@ -21,7 +21,7 @@ public:
     bool contains(AbstractMagic* key) const noexcept;
     bool contains(std::string name) const noexcept;
 
-    AbstractMagic* getSpell(std::string name) noexcept;
+    AbstractMagic* getSpell(std::string name);
     AbstractMagic* operator[](std::string name) noexcept;
 
     std::unordered_map<AbstractMagic*, int>::iterator begin();
@@ -29,6 +29,6 @@ public:
 
     int getCooldown(AbstractMagic* spell) noexcept;
     int getCooldown(std::string name) noexcept;
-	
-	void cast(AbstractMagic* spell, AbstractPlayer* lhs, AbstractPlayer* rhs);
+
+    void cast(AbstractMagic* spell, AbstractPlayer* lhs, AbstractPlayer* rhs);
 };

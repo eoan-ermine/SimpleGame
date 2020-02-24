@@ -254,14 +254,15 @@ SpellsDeck& AbstractPlayer::getSpells() noexcept {
 }
 
 void AbstractPlayer::castSpell(std::string spellName, AbstractPlayer* victim) noexcept {
-	if(this->canCast(spell)) {
-		this->spells.cast(spells[spellName], this, victim);
-	}
+    AbstractMagic* spell = spells[spellName];
+    if(this->canCast(spell)) {
+        this->spells.cast(spell, this, victim);
+    }
 }
 
 void AbstractPlayer::castSpell(AbstractMagic* spell, AbstractPlayer* victim) noexcept {
     if(this->canCast(spell)) {
-		this->spells.cast(spell, this, victim);
+        this->spells.cast(spell, this, victim);
     }
 }
 
@@ -273,40 +274,43 @@ bool AbstractPlayer::canCast(AbstractMagic* spell) noexcept {
 }
 
 bool AbstractPlayer::throwPotion(AbstractEffectPotion* potion, AbstractPlayer* victim) {
-	if(inventory
-	inventory->deleteItem(potion);
-	potion->use(this, victim);
+    if(inventory.contains(potion)) {
+        inventory.deleteItem(potion);
+        potion->use(this, victim);
+        return true;
+    }
+    return false;
 }
 
 bool AbstractPlayer::giveItem(Item* item, AbstractPlayer* rhs) {
-	if(inventory.contains(item)) {
-		inventory->deleteItem(item);
-		rhs->getInventory()->addItem(item);
-		return true;
-	}
-	return false;
+    if(inventory.contains(item)) {
+        inventory.deleteItem(item);
+        rhs->getInventory()->addItem(item);
+        return true;
+    }
+    return false;
 }
 
 AbstractWeapon* AbstractPlayer::getWeapon(WeaponType type) {
-	switch(type) {
-	case WeaponType::FIRST:
-		return this->wearedEquipment.weapon.first;
-	default:
-		return nullptr;
-	}
+    switch(type) {
+    case WeaponType::FIRST:
+        return this->wearedEquipment.weapon.first;
+    default:
+        return nullptr;
+    }
 }
 
 AbstractArmor* AbstractPlayer::getArmor(ArmorType type) {
-	switch(type) {
-	case ArmorType::HEAD:
-		return this->wearedEquipment.armor.head;
-	case ArmorType::BODY:
-		return this->wearedEquipment.armor.body;
-	case ArmorType::LEGS:
-		return this->wearedEquipment.armor.legs;
-	case ArmorType::BOOTS:
-		return this->wearedEquipment.armor.boots;
-	default:
-		return nullptr;
-	}
+    switch(type) {
+    case ArmorType::HEAD:
+        return this->wearedEquipment.armor.head;
+    case ArmorType::BODY:
+        return this->wearedEquipment.armor.body;
+    case ArmorType::LEGS:
+        return this->wearedEquipment.armor.legs;
+    case ArmorType::BOOTS:
+        return this->wearedEquipment.armor.boots;
+    default:
+        return nullptr;
+    }
 }

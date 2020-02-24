@@ -1,5 +1,7 @@
 #include "SpellsDeck.h"
 
+#include "../../Player/AbstractPlayer/AbstractPlayer.h"
+
 SpellsDeck::SpellsDeck() { }
 
 SpellsDeck::~SpellsDeck() { }
@@ -31,7 +33,7 @@ bool SpellsDeck::contains(std::string name) const noexcept  {
     return std::find_if(spells.begin(), spells.end(), predicate) != spells.end();
 }
 
-AbstractMagic* SpellsDeck::getSpell(std::string name) noexcept {
+AbstractMagic* SpellsDeck::getSpell(std::string name) {
     auto predicate = [&name](auto pair) {
         return pair.first->getName() == name;
     };
@@ -70,8 +72,8 @@ int SpellsDeck::getCooldown(AbstractMagic* spell) noexcept {
     return (this->contains(spell) ? spells[spell] : 100);
 }
 
-void cast(AbstractMagic* spell, AbstractPlayer* lhs, AbstractPlayer* rhs) {
+void SpellsDeck::cast(AbstractMagic* spell, AbstractPlayer* lhs, AbstractPlayer* rhs) {
     spell->action(lhs, rhs);
-    lhs->changeStat(StatType::MANA, -manaCost);
-    this->spellCasted(this);
+    lhs->changeStat(StatType::MANA, -(spell->getManaCost()));
+    this->spellCasted(spell);
 }

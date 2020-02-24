@@ -64,16 +64,16 @@ public:
     bool wearEquipment(AbstractArmor* armor);
     bool wearEquipment(AbstractWeapon* weapon);
     void unwearEquipment(EquipmentType equipmentType, ArmorType armorType);
-	
-	AbstractWeapon* getWeapon(ArmorType type);
-	AbstractArmor* getArmor(WeaponType type);
+
+    AbstractWeapon* getWeapon(WeaponType type);
+    AbstractArmor* getArmor(ArmorType type);
 
     Inventory* getInventory() noexcept;
     bool dropItem(Item* item) noexcept;
     bool getItem(Item* item) noexcept;
-	bool giveItem(Item* item, AbstractPlayer* rhs);
-	
-	bool throwPotion(AbstractEffectPotion* potion, AbstractPlayer* victim);
+    bool giveItem(Item* item, AbstractPlayer* rhs);
+
+    bool throwPotion(AbstractEffectPotion* potion, AbstractPlayer* victim);
 
     std::vector<AbstractEffect*>& getEffects() noexcept;
     void addEffect(AbstractEffect* effect) noexcept;

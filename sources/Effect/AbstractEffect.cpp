@@ -3,8 +3,8 @@
 #include "../Player/AbstractPlayer/AbstractPlayer.h"
 
 AbstractEffect::AbstractEffect(std::string name, std::string description, int duration): AbstractEffect(duration) {
-	this->name = name;
-	this->description = description;
+    this->name = name;
+    this->description = description;
 }
 
 AbstractEffect::AbstractEffect(int duration): duration(duration), last(duration) {
@@ -35,29 +35,29 @@ void AbstractEffect::action(AbstractPlayer* ply) {
 }
 
 std::string_view AbstractEffect::getName() const noexcept {
-	return this->name;
+    return this->name;
 }
 
 std::string_view AbstractEffect::getDescription() const noexcept {
-	return this->description;
+    return this->description;
 }
 
 void AbstractEffect::setName(std::string name) noexcept {
-	this->name = name;
+    this->name = name;
 }
 
 void AbstractEffect::setDescription(std::string description) noexcept {
-	this->description = description;
+    this->description = description;
 }
 
 void AbstractEffect::setDuration(int newDuration) noexcept {
-	this->duration = newDuration;
+    this->duration = newDuration;
 }
 
 void AbstractEffect::setRemains(int newRemains) noexcept {
-	this->remains = newRemains;
+    this->last = newRemains;
 }
 
 void AbstractEffect::setPermanent(bool newPermanent) noexcept {
-	this->permanent = newPermanent;
+    this->permanent = newPermanent;
 }

@@ -4,21 +4,21 @@
 #include "../../../Effect/AbstractEffect.h"
 
 AbstractEffectPotion::AbstractEffectPotion(AbstractEffect* effect): Item("Default potion name", "Default potion description", ItemType::ITEM) {
-	this->effect = effect;	
+    this->effect = effect;
 }
 
-AbstractEffectPotion(std::string name, std::string description, AbstractEffect* effect): Item(name, description, ItemType::ITEM) {
-	this->effect = effect;	
+AbstractEffectPotion::AbstractEffectPotion(std::string name, std::string description, AbstractEffect* effect): Item(name, description, ItemType::ITEM) {
+    this->effect = effect;
 }
-	
+
 void AbstractEffectPotion::setEffect(AbstractEffect* newEffect) {
-	this->effect = newEffect;
+    this->effect = newEffect;
 }
 
 AbstractEffect* AbstractEffectPotion::getEffect(AbstractEffect* newEffect) {
-	return this->effect;
+    return this->effect;
 }
-	
+
 void AbstractEffectPotion::use(AbstractPlayer* lhs, AbstractPlayer* rhs) {
-	rhs->addEffect(effect);
+    rhs->addEffect(effect);
 }

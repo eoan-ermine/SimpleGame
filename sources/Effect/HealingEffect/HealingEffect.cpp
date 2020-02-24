@@ -1,4 +1,4 @@
-#include "BurningEffect.h"
+#include "HealingEffect.h"
 
 #include "../../Player/AbstractPlayer/AbstractPlayer.h"
 
