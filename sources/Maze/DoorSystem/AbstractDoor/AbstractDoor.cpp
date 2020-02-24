@@ -29,3 +29,11 @@ void AbstractDoor::use(AbstractPlayer* ply) {
         ply->setRoom(this->destination);
     }
 }
+
+AbstractRoom* AbstractDoor::getDestination() noexcept {
+	return this->destination;
+}
+
+AbstractRoom* AbstractDoor::getSource() noexcept {
+	return this->source;
+}

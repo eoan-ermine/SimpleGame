@@ -7,5 +7,4 @@ public:
     AbstractMonster();
     AbstractMonster(int health);
     ~AbstractMonster();
-
 };

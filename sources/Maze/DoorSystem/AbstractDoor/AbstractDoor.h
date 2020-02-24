@@ -15,6 +15,8 @@ public:
     ~AbstractDoor();
 
     Direction getDirection() const noexcept;
+	AbstractRoom* getDestination() noexcept;
+	AbstractRoom* getSource() noexcept;
 
     void use(AbstractPlayer* ply);
 

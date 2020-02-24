@@ -19,7 +19,7 @@ enum class Direction { NORTH, SOUTH, EAST, WEST };
 enum ItemType { ITEM, EQUIPMENT, MAGIC };
 enum class EquipmentType {WEAPON, ARMOR};
 
-enum class ArmorType {NONE, HEAD, BODY, LEGS, BOOTS};
+enum class ArmorType {HEAD, BODY, LEGS, BOOTS};
 enum class WeaponType {FIRST};
 
 struct Penetration {

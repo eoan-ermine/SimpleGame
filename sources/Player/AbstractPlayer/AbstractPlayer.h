@@ -15,6 +15,7 @@
 #include "../../GameWindow/Game/GameObject/GameObject.h"
 #include "../../Item/Magic/AbstractMagic/AbstractMagic.h"
 #include "../../Item/SpellsDeck/SpellsDeck.h"
+#include "../../Item/Food/AbstractEffectPotion/AbstractEffectPotion.h"
 
 class AbstractPlayer: public GameObject {
 private:
@@ -63,10 +64,16 @@ public:
     bool wearEquipment(AbstractArmor* armor);
     bool wearEquipment(AbstractWeapon* weapon);
     void unwearEquipment(EquipmentType equipmentType, ArmorType armorType);
+	
+	AbstractWeapon* getWeapon(ArmorType type);
+	AbstractArmor* getArmor(WeaponType type);
 
     Inventory* getInventory() noexcept;
     bool dropItem(Item* item) noexcept;
     bool getItem(Item* item) noexcept;
+	bool giveItem(Item* item, AbstractPlayer* rhs);
+	
+	bool throwPotion(AbstractEffectPotion* potion, AbstractPlayer* victim);
 
     std::vector<AbstractEffect*>& getEffects() noexcept;
     void addEffect(AbstractEffect* effect) noexcept;
