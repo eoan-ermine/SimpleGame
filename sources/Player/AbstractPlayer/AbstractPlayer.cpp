@@ -20,7 +20,11 @@ void AbstractPlayer::setMaze(AbstractMaze* newMaze) noexcept {
 }
 
 void AbstractPlayer::setRoom(AbstractRoom* newRoom) noexcept {
+    if(this->currentRoom != nullptr) {
+        this->currentRoom->deletePlayer(this);
+    }
     this->currentRoom = newRoom;
+    this->currentRoom->addPlayer(this);
 }
 
 Inventory* AbstractPlayer::getInventory() noexcept {
@@ -312,5 +316,28 @@ AbstractArmor* AbstractPlayer::getArmor(ArmorType type) {
         return this->wearedEquipment.armor.boots;
     default:
         return nullptr;
+    }
+}
+
+bool AbstractPlayer::getState(StateType type) {
+    switch(type) {
+    case StateType::WALK:
+        return this->state.canWalk;
+    case StateType::RUN:
+        return this->state.canRun;
+    case StateType::ATTACK:
+        return this->state.canAttack;
+    default:
+        return false;
+    }
+}
+
+void AbstractPlayer::setState(StateType type, bool newValue) {
+    if(type == StateType::WALK) {
+        this->state.canWalk = newValue;
+    } else if(type == StateType::RUN) {
+        this->state.canRun = newValue;
+    } else if(type == StateType::ATTACK) {
+        this->state.canAttack = newValue;
     }
 }

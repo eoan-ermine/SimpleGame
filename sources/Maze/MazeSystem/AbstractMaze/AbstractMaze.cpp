@@ -27,3 +27,21 @@ const std::vector<AbstractRoom*>& AbstractMaze::getRooms() {
 std::size_t AbstractMaze::countOfRooms() {
     return rooms.size();
 }
+
+void AbstractMaze::addPlayer(AbstractPlayer* player) noexcept {
+    this->players.push_back(player);
+}
+
+void AbstractMaze::deletePlayer(AbstractPlayer* player) noexcept {
+    if(auto it = std::find(players.begin(), players.end(), player); it != players.end()) {
+        players.erase(it);
+    }
+}
+
+void AbstractMaze::deletePlayers() noexcept {
+    players.clear();
+}
+
+bool AbstractMaze::contains(AbstractPlayer* player) const noexcept {
+    return std::find(players.begin(), players.end(), player) != players.end();
+}

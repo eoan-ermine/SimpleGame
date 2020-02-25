@@ -23,6 +23,10 @@ private:
     AbstractRoom* currentRoom = nullptr;
 
     struct {
+        bool canWalk = true, canRun = true, canAttack = true;
+    } state;
+
+    struct {
         float health=100, hunger=100, maxHealth=100, maxHunger=100;
         int accuracy=10, evasion=10, strength=10, experience=0, level=1,
             maxMana = 100, mana = 100;
@@ -83,4 +87,7 @@ public:
     bool canCast(AbstractMagic* spell) noexcept;
     void castSpell(std::string spellName, AbstractPlayer* victim) noexcept;
     void castSpell(AbstractMagic* spell, AbstractPlayer* victim) noexcept;
+
+    bool getState(StateType type);
+    void setState(StateType type, bool newValue);
 };

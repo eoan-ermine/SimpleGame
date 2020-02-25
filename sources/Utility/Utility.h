@@ -29,3 +29,7 @@ struct Penetration {
 enum class StatType {
     HEALTH, HUNGER, MAX_HEALTH, MAX_HUNGER, ACCURACY, EVASION, STRENGTH, EXPERIENCE, LEVEL, ARMOR, MANA, MAX_MANA
 };
+
+enum class StateType {
+    WALK, RUN, ATTACK
+};
