@@ -42,7 +42,6 @@ void Game::update() {
 }
 
 void Game::updateEffects() {
-    std::vector<std::pair<ObjectType, GameObject*>> toDelete;
     for(GameObject* object: gameObjects[ObjectType::PLAYER]) {
         AbstractPlayer* player = dynamic_cast<AbstractPlayer*>(object);
         if(player == nullptr) {
@@ -52,12 +51,10 @@ void Game::updateEffects() {
             if(effect->getRemains() > 0) {
                 effect->action(player);
             } else {
-                toDelete.push_back({ObjectType::EFFECT, dynamic_cast<GameObject*>(effect)});
+                effect->afterAction(player);
+                player->deleteEffect(effect);
             }
         }
-    }
-    for(auto pair: toDelete) {
-        this->deleteObject(pair.first, pair.second);
     }
 }
 

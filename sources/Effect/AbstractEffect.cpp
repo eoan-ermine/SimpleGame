@@ -34,6 +34,10 @@ void AbstractEffect::action(AbstractPlayer* ply) {
     }
 }
 
+void AbstractEffect::afterAction(AbstractPlayer* ply) { }
+
+void AbstractEffect::preAction(AbstractPlayer* ply) { }
+
 std::string_view AbstractEffect::getName() const noexcept {
     return this->name;
 }

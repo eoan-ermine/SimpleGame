@@ -244,6 +244,7 @@ std::vector<AbstractEffect*>& AbstractPlayer::getEffects() noexcept {
 }
 
 void AbstractPlayer::addEffect(AbstractEffect* effect) noexcept {
+    effect->preAction(this);
     effects.push_back(effect);
 }
 
