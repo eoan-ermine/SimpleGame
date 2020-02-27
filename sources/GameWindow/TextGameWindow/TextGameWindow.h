@@ -7,19 +7,16 @@
 
 #include "../AbstractGameWindow/AbstractGameWindow.h"
 
-enum GameState { INITIALIZATION, MAIN };
+#include "../GameState/MenuState/MenuState.h"
 
 class TextGameWindow: public AbstractGameWindow {
 public:
     bool windowIsOpen;
-    GameState currentState;
+    GameState* currentState;
 
     TextGameWindow();
     ~TextGameWindow();
 public:
     void show() override;
-
-    void waitInput();
-    std::string getInterface();
-    void drawInterface(std::string interface);
+    void changeState(GameState* newState);
 };
